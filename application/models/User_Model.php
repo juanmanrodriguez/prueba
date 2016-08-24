@@ -1,6 +1,6 @@
 <?php
 
-class user_model extends CI_Model
+class User_Model extends CI_Model
 {
 
     public function __construct()
@@ -24,9 +24,9 @@ class user_model extends CI_Model
             'nombre_usuario' => $nombre_usuario,
             'password_usuario' => $password_usuario
         );
-        if ($id)
+        if ($id_usuario)
         {
-            $this->db->where('id_usuario', $id);
+            $this->db->where('id_usuario', $id_usuario);
             $this->db->update('users', $data);
         }
     }
@@ -49,9 +49,8 @@ class user_model extends CI_Model
 
     public function get_all()
     {
-        $this->db->select('id, titulo, descripcion, prioridad');
-        $this->db->from('informes');
-        $this->db->order_by('prioridad, titulo', 'asc');
+        $this->db->select('id_usuario, nombre_usuario, password_usuario');
+        $this->db->from('users');
         $consulta = $this->db->get();
         $resultado = $consulta->result();
       return $resultado;
