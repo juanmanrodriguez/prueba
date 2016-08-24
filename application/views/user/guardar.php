@@ -6,7 +6,7 @@
                 </form>
                 <ul class="nav menu">
                     <li class="active">
-                        <a href="index.html">
+                        <a href="<?php echo site_url("User_Controller") ?>">
                             <svg class="glyph stroked male-user">
                             <use xlink:href="#stroked-male-user">
                             </use>
@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="forms.html">
+                        <a href="<?php echo site_url("Project_Controller") ?>">
                             <svg class="glyph stroked pencil">
                             <use xlink:href="#stroked-pencil">
 

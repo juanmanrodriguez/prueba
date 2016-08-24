@@ -15,7 +15,7 @@ class Project_Controller extends CI_Controller
         {
             $data = array();
             $this->load->model('Project_Model');
-            $data['projects'] = $this->User_Model->get_all();
+            $data['projects'] = $this->Project_Model->get_all();
 
             $data['title'] = "Inicio";
 
@@ -33,8 +33,8 @@ class Project_Controller extends CI_Controller
     {
         $data = array();
         $this->load->model('Project_Model');
-        $user = $this->User_Model->get_by_id($id);
-        $data['projects'] = $user;
+        $projects = $this->Project_Model->get_by_id($id);
+        $data['projects'] = $projects;
 
         $data['title'] = "Ver";
 
@@ -46,12 +46,12 @@ class Project_Controller extends CI_Controller
     public function guardar($id = null)
     {
         $data = array();
-        $this->load->model('User_Model');
+        $this->load->model('Project_Model');
         if ($id)
         {
-            $user = $this->User_Model->get_by_id($id);
-            $data['nombre_proyecto'] = $user->nombre_usuario;
-            $data['descripcion_proyecto'] = $user->password_usuario;
+            $user = $this->Project_Model->get_by_id($id);
+            $data['nombre_proyecto'] = $user->nombre_proyecto;
+            $data['descripcion_proyecto'] = $user->descripcion_proyecto;
         }
         else
         {
@@ -65,15 +65,14 @@ class Project_Controller extends CI_Controller
         $this->load->view('project/footer');
     }
 
-    public function guardar_usuario()
+    public function guardar_proyecto()
     {
         if ($this->input->post())
         {
-            $id_usuario = $this->input->post('documento');
-            $nombre_usuario = $this->input->post('nombre');
-            $password_usuario = $this->input->post('pass');
-            $this->load->model('User_Model');
-            $this->User_Model->add($id_usuario, $nombre_usuario, $password_usuario);
+            $nombre_proyecto = $this->input->post('nombre_proyecto');
+            $descripcion_proyecto = $this->input->post('descripcion_proyecto');
+            $this->load->model('Project_Model');
+            $this->Project_Model->add($nombre_proyecto, $descripcion_proyecto);
             redirect(base_url());
         }
     }
@@ -81,25 +80,23 @@ class Project_Controller extends CI_Controller
     public function edit($id = null)
     {
         $data = array();
-        $this->load->model('User_Model');
+        $this->load->model('Project_Model');
         if ($id)
         {
-            $user = $this->User_Model->get_by_id($id);
-            $data['id_usuario'] = $user->id_usuario;
-            $data['nombre_usuario'] = $user->nombre_usuario;
-            $data['password_usuario'] = $user->password_usuario;
+            $user = $this->Project_Model->get_by_id($id);
+            $data['nombre_proyecto'] = $user->nombre_proyecto;
+            $data['descripcion_proyecto'] = $user->descripcion_proyecto;
         }
         else
         {
-            $data['id_usuario'] = null;
-            $data['nombre_usuario'] = null;
-            $data['password_usuario'] = null;
+            $data['nombre_proyecto'] = null;
+            $data['descripcion_proyecto'] = null;
         }
         $data['title'] = "Guardar";
 
-        $this->load->view('user/header', $data);
-        $this->load->view('user/editar', $data);
-        $this->load->view('user/footer');
+        $this->load->view('project/header', $data);
+        $this->load->view('project/editar', $data);
+        $this->load->view('project/footer');
     }
 
     public function edit_user()
@@ -117,8 +114,8 @@ class Project_Controller extends CI_Controller
 
     public function delete($id)
     {
-        $this->load->model('User_Model');
-        $this->User_Model->delete($id);
+        $this->load->model('Project_Model');
+        $this->Project_Model->delete($id);
         redirect(base_url());
     }
 }

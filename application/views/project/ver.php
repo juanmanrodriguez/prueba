@@ -5,16 +5,16 @@
 			</div>
                 </form>
                 <ul class="nav menu">
-                    <li class="active">
-                        <a href="index.html">
+                    <li>
+                        <a href="<?php echo site_url("User_Controller") ?>">
                             <svg class="glyph stroked male-user">
                             <use xlink:href="#stroked-male-user">
                             </use>
                             </svg> Usuarios
                         </a>
                     </li>
-                    <li>
-                        <a href="forms.html">
+                    <li class="active">
+                        <a href="<?php echo site_url("Project_Controller") ?>">
                             <svg class="glyph stroked pencil">
                             <use xlink:href="#stroked-pencil">
 
@@ -40,17 +40,13 @@
                                 <form role="form">
                                     <div class="form-group">
                                         <label>Documento</label>
-                                        <input type="text" class="form-control" placeholder="<?php echo $user->id_usuario ?>" readonly="true" >
+                                        <input type="text" class="form-control" placeholder="<?php echo $projects->nombre_proyecto ?>" readonly="true" >
                                     </div>
                                     <div class="form-group">
                                         <label>Nombre</label>
-                                        <input type="text" class="form-control" placeholder="<?php echo $user->nombre_usuario; ?>" readonly="true" >
+                                        <textarea class="form-control" name="descripcion_proyecto" rows="3" placeholder="<?php echo $projects->descripcion_proyecto; ?>" ></textarea>
                                     </div>								
-                                    <div class="form-group">
-                                        <label>Contrase&ntilde;a</label>
-                                        <input type="text" class="form-control" placeholder="<?php echo $user->password_usuario; ?>" readonly="true" >
-                                    </div>
-                                    <a class="btn btn-info" href="<?php echo site_url("User_Controller"); ?>"> Volver atrás </a>
+                                    <a class="btn btn-info" href="<?php echo site_url("Project_Controller"); ?>"> Volver atrás </a>
                             </div>
                             </form>
                         </div>

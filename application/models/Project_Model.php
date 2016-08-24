@@ -8,14 +8,13 @@ class Project_Model extends CI_Model
         parent::__construct();
     }
 
-    public function add($id_usuario, $nombre_usuario, $password_usuario)
+    public function add($nombre_proyecto, $descripcion_proyecto)
     {
         $data = array(
-            'id_usuario' => $id_usuario,
-            'nombre_usuario' => $nombre_usuario,
-            'password_usuario' => $password_usuario
+            'nombre_proyecto' => $nombre_proyecto,
+            'descripcion_proyecto' => $descripcion_proyecto,
         );
-        $this->db->insert('users', $data);
+        $this->db->insert('Proyecto', $data);
     }
     
     public function edit($id_usuario, $nombre_usuario, $password_usuario) {
@@ -33,15 +32,15 @@ class Project_Model extends CI_Model
 
     public function delete($id)
     {
-        $this->db->where('id_usuario', $id);
-        $this->db->delete('users');
+        $this->db->where('nombre_proyecto', $id);
+        $this->db->delete('Proyecto');
     }
 
     public function get_by_id($id)
     {
-        $this->db->select('id_usuario, nombre_usuario, password_usuario');
-        $this->db->from('users');
-        $this->db->where('id_usuario', $id);
+        $this->db->select('nombre_proyecto, descripcion_proyecto');
+        $this->db->from('Proyecto');
+        $this->db->where('nombre_proyecto', $id);
         $consulta = $this->db->get();
         $resultado = $consulta->row();
         return $resultado;
@@ -49,8 +48,8 @@ class Project_Model extends CI_Model
 
     public function get_all()
     {
-        $this->db->select('id_usuario, nombre_usuario, password_usuario');
-        $this->db->from('users');
+        $this->db->select('nombre_proyecto, descripcion_proyecto');
+        $this->db->from('Proyecto');
         $consulta = $this->db->get();
         $resultado = $consulta->result();
       return $resultado;

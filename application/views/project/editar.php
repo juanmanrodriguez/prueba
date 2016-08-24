@@ -5,16 +5,16 @@
 			</div>
                 </form>
                 <ul class="nav menu">
-                    <li class="active">
-                        <a href="index.html">
+                    <li>
+                        <a href="<?php echo site_url("User_Controller") ?>">
                             <svg class="glyph stroked male-user">
                             <use xlink:href="#stroked-male-user">
                             </use>
                             </svg> Usuarios
                         </a>
                     </li>
-                    <li>
-                        <a href="forms.html">
+                    <li class="active">
+                        <a href="<?php echo site_url("Project_Controller") ?>">
                             <svg class="glyph stroked pencil">
                             <use xlink:href="#stroked-pencil">
 
@@ -37,21 +37,17 @@
                         <div class="panel-heading">Editar usuario</div>
                         <div class="panel-body">
                             <div class="col-md-6">
-                                <form role="form" method="post" action="<?php echo base_url() ?>User_Controller/edit_user/<?php echo $id_usuario ?>">    
+                                <form role="form" method="post" action="<?php echo base_url() ?>Project_Controller/edit_user/<?php echo $nombre_proyecto ?>">    
                                     <div class="form-group">
-                                        <label>Documento</label>
-                                        <input type="text" class="form-control" name="documento" value="<?php echo $id_usuario ?>" readonly="true" />
+                                        <label> Nombre </label>
+                                        <input type="text" name="nombre_proyecto" class="form-control" placeholder="Nombre" value="<?php echo $nombre_proyecto ?>" readonly="true" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text" class="form-control" name="nombre" value="<?php echo $nombre_usuario; ?>" />
-                                    </div>								
-                                    <div class="form-group">
-                                        <label>Contrase&ntilde;a</label>
-                                        <input type="text" class="form-control" min="1" max="5" name="pass" value="<?php echo $password_usuario; ?>" />
+                                        <label> Descripcion </label>
+                                        <textarea class="form-control" name="descripcion_proyecto" rows="3" placeholder="Descripcion"  value="<?php echo $descripcion_proyecto; ?>" ></textarea>
                                     </div>
                                     <input type="submit" class="btn btn-success" value="Guardar" />
-                                    <a class="btn btn-danger" href="<?php echo site_url("User_Controller"); ?>"> Cancelar </a>
+                                    <a class="btn btn-danger" href="<?php echo site_url("Project_Controller"); ?>"> Cancelar </a>
                                 </form>
                             </div>
                         </div>
