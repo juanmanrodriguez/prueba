@@ -14,9 +14,14 @@
 class Login_Model
 {
 
-    public function login($usuario, $password)
+    public function get_by_id($id)
     {
-        
+        $this->db->select('id_usuario, nombre_usuario, password_usuario');
+        $this->db->from('users');
+        $this->db->where('id_usuario', $id);
+        $consulta = $this->db->get();
+        $resultado = $consulta->row();
+        return $resultado;
     }
 
 }
