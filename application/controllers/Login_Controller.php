@@ -13,11 +13,12 @@
  */
 class Login_Controller extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
     }
-    
+
     public function index()
     {
         $data['title'] = "Inicio de sesi&oacute;n";
@@ -27,61 +28,36 @@ class Login_Controller extends CI_Controller
         $this->load->view('login', $data);
         $this->load->view('footer');
     }
-    
-    
-    public function login()
+
+    function login()
     {
-        $user = $this->input->post('nombre_usuario');
-        $password = $this->input->post('password_usuario');
-        
-        if($user && $password)
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $nombre_usuario = $this->input->post('nombre_usuario');
+        $password_usuario = $this->input->post('password_usuario');
+
+        if (!$nombre_usuario || !$password_usuario)
         {
-            $data['title'] = "Inicio de sesi&oacute;n";
-            
-            redirect(site_url("User_Controller/index/".$user));
+            $data['error'] = "1";
+            $this->load->view('login', $data);
         }
         else
         {
-            $data['title'] = "Inicio de sesi&oacute;n";
-            $data['error'] = "El usuario o la contrase&ntilde;a son incorrectos";
-
-            $this->load->view('header', $data);
-            $this->load->view('login', $data);
-            $this->load->view('footer');
+            //echo $nombre_usuario." ".$password_usuario;
+            $this->load->model('Login_Model');
+            $usuario = $this->Login_Model->ValidarUsuario($nombre_usuario, $password_usuario);
+            //print_r($usuario);
+            if ($password_usuario === $usuario->password_usuario)
+            {
+                redirect(site_url("User_Controller"));
+            }
+            else
+            {
+                $data['error'] = "Usuario o contrase&ntilde; incorrectos, por favor vuelva a intentar";
+                $this->load->view('login', $data);
+            }
         }
-        
-        /*$data = array();
-        $this->load->model('User_Model');
-        $user = $this->User_Model->get_by_id($id);
-        $data['user'] = $user;
-        
-        $data['title'] = "Ver";
-        
-        $this->load->view('user/header', $data);
-        $this->load->view('user/ver', $data);
-        $this->load->view('user/footer');
-        
-        $user = $this->input->post('password_usuario');
-        $password = $this->input->post('password_usuario');
-        
-        $this->load->model('Login_Model');
-
-        if ($user == "admin" && $password == "admin")
-        {
-            $data['title'] = "Inicio de sesi&oacute;n";
-            
-            $this->load->view('header', $data);
-            $this->load->view('login', $data);
-            $this->load->view('footer');
-        }
-        else
-        {
-            $data['title'] = "Inicio de sesi&oacute;n";
-            $data['error'] = "El usuario o la contrase&ntilde;a son incorrectos";
-
-            $this->load->view('header', $data);
-            $this->load->view('login', $data);
-            $this->load->view('footer');
-        }*/
     }
+
 }

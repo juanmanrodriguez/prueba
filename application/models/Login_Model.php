@@ -11,16 +11,20 @@
  *
  * @author juan
  */
-class Login_Model
+class Login_Model extends CI_Model
 {
 
-    public function get_by_id($id)
+    function ValidarUsuario($id, $password_usuario)
     {
         $this->db->select('id_usuario, nombre_usuario, password_usuario');
         $this->db->from('users');
         $this->db->where('id_usuario', $id);
+        $this->db->where('password_usuario', $password_usuario);
         $consulta = $this->db->get();
+        //echo $this->db->last_query();
+        //print_r($consulta);
         $resultado = $consulta->row();
+        //print_r($resultado);
         return $resultado;
     }
 
