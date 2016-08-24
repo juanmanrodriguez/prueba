@@ -66,7 +66,7 @@
                                     </tbody>
                                 </table>
                             <?php else: ?>
-                                <p> No hay usuarios </p>
+                                <p> No hay proyectos </p>
                             <?php endif; ?>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 <?php
 
-class User_Controller extends CI_Controller
+class Project_Controller extends CI_Controller
 {
 
     public function __construct()
@@ -14,14 +14,14 @@ class User_Controller extends CI_Controller
         if ($this->session->userdata('logueado'))
         {
             $data = array();
-            $this->load->model('User_Model');
-            $data['users'] = $this->User_Model->get_all();
+            $this->load->model('Project_Model');
+            $data['projects'] = $this->User_Model->get_all();
 
             $data['title'] = "Inicio";
 
-            $this->load->view('user/header', $data);
-            $this->load->view('user/index', $data);
-            $this->load->view('user/footer');
+            $this->load->view('project/header', $data);
+            $this->load->view('project/index', $data);
+            $this->load->view('project/footer');
         }
         else
         {
@@ -32,15 +32,15 @@ class User_Controller extends CI_Controller
     public function ver($id)
     {
         $data = array();
-        $this->load->model('User_Model');
+        $this->load->model('Project_Model');
         $user = $this->User_Model->get_by_id($id);
-        $data['user'] = $user;
+        $data['projects'] = $user;
 
         $data['title'] = "Ver";
 
-        $this->load->view('user/header', $data);
-        $this->load->view('user/ver', $data);
-        $this->load->view('user/footer');
+        $this->load->view('project/header', $data);
+        $this->load->view('project/ver', $data);
+        $this->load->view('project/footer');
     }
 
     public function guardar($id = null)
@@ -50,21 +50,19 @@ class User_Controller extends CI_Controller
         if ($id)
         {
             $user = $this->User_Model->get_by_id($id);
-            $data['id_usuario'] = $user->id_usuario;
-            $data['nombre_usuario'] = $user->nombre_usuario;
-            $data['password_usuario'] = $user->password_usuario;
+            $data['nombre_proyecto'] = $user->nombre_usuario;
+            $data['descripcion_proyecto'] = $user->password_usuario;
         }
         else
         {
-            $data['id_usuario'] = null;
-            $data['nombre_usuario'] = null;
-            $data['password_usuario'] = null;
+            $data['nombre_proyecto'] = null;
+            $data['descripcion_proyecto'] = null;
         }
         $data['title'] = "Guardar";
 
-        $this->load->view('user/header', $data);
-        $this->load->view('user/guardar', $data);
-        $this->load->view('user/footer');
+        $this->load->view('project/header', $data);
+        $this->load->view('project/guardar', $data);
+        $this->load->view('project/footer');
     }
 
     public function guardar_usuario()

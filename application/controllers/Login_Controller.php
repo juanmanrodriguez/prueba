@@ -49,11 +49,11 @@ class Login_Controller extends CI_Controller
             $usuario = $this->Login_Model->ValidarUsuario($nombre_usuario, $password_usuario);
             
             $usuario_data = array(
-               'id_usuario' => $usuario->id_usuario,
-               'nombre_usuario' => $usuario->nombre_usuario,
-               'logueado' => TRUE
+                'id_usuario' => $usuario->id_usuario,
+                'nombre_usuario' => $usuario->nombre_usuario,
+                'logueado' => TRUE
             );
-            
+
             //print_r($usuario);
             if ($password_usuario === $usuario->password_usuario)
             {
@@ -66,6 +66,15 @@ class Login_Controller extends CI_Controller
                 $this->load->view('login', $data);
             }
         }
+    }
+
+    public function cerrar_sesion()
+    {
+        $usuario_data = array(
+            'logueado' => FALSE
+        );
+        $this->session->set_userdata($usuario_data);
+        redirect(site_url("Login_Controller"));
     }
 
 }
