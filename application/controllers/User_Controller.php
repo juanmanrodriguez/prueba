@@ -73,7 +73,7 @@ class User_Controller extends CI_Controller
     }
     
     public function edit($id = null)
-    {
+    {        
         $data = array();
         $this->load->model('User_Model');
         if ($id)
