@@ -10,15 +10,23 @@ class User_Controller extends CI_Controller
 
     public function index()
     {
-        $data = array();
-        $this->load->model('User_Model');
-        $data['users'] = $this->User_Model->get_all();
-        
-        $data['title'] = "Inicio";
-        
-        $this->load->view('user/header', $data);
-        $this->load->view('user/index', $data);
-        $this->load->view('user/footer');
+
+        if ($this->session->userdata('logueado'))
+        {
+            $data = array();
+            $this->load->model('User_Model');
+            $data['users'] = $this->User_Model->get_all();
+
+            $data['title'] = "Inicio";
+
+            $this->load->view('user/header', $data);
+            $this->load->view('user/index', $data);
+            $this->load->view('user/footer');
+        }
+        else
+        {
+            base_url();
+        }
     }
 
     public function ver($id)
@@ -27,9 +35,9 @@ class User_Controller extends CI_Controller
         $this->load->model('User_Model');
         $user = $this->User_Model->get_by_id($id);
         $data['user'] = $user;
-        
+
         $data['title'] = "Ver";
-        
+
         $this->load->view('user/header', $data);
         $this->load->view('user/ver', $data);
         $this->load->view('user/footer');
@@ -53,7 +61,7 @@ class User_Controller extends CI_Controller
             $data['password_usuario'] = null;
         }
         $data['title'] = "Guardar";
-        
+
         $this->load->view('user/header', $data);
         $this->load->view('user/guardar', $data);
         $this->load->view('user/footer');
@@ -71,9 +79,9 @@ class User_Controller extends CI_Controller
             redirect(base_url());
         }
     }
-    
+
     public function edit($id = null)
-    {        
+    {
         $data = array();
         $this->load->model('User_Model');
         if ($id)
@@ -90,12 +98,12 @@ class User_Controller extends CI_Controller
             $data['password_usuario'] = null;
         }
         $data['title'] = "Guardar";
-        
+
         $this->load->view('user/header', $data);
         $this->load->view('user/editar', $data);
         $this->load->view('user/footer');
     }
-    
+
     public function edit_user()
     {
         if ($this->input->post())
@@ -114,6 +122,15 @@ class User_Controller extends CI_Controller
         $this->load->model('User_Model');
         $this->User_Model->delete($id);
         redirect(base_url());
+    }
+
+    public function cerrar_sesion()
+    {
+        $usuario_data = array(
+            'logueado' => FALSE
+        );
+        $this->session->set_userdata($usuario_data);
+        base_url();
     }
 
 }

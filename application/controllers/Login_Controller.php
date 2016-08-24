@@ -47,9 +47,17 @@ class Login_Controller extends CI_Controller
             //echo $nombre_usuario." ".$password_usuario;
             $this->load->model('Login_Model');
             $usuario = $this->Login_Model->ValidarUsuario($nombre_usuario, $password_usuario);
+            
+            $usuario_data = array(
+               'id_usuario' => $usuario->id_usuario,
+               'nombre_usuario' => $usuario->nombre_usuario,
+               'logueado' => TRUE
+            );
+            
             //print_r($usuario);
             if ($password_usuario === $usuario->password_usuario)
             {
+                $this->session->set_userdata($usuario_data);
                 redirect(site_url("User_Controller"));
             }
             else
