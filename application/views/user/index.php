@@ -29,15 +29,4 @@
             </table>
         <?php else: ?>
             <p> No hay informes </p>
-        <?php endif; ?>
-        <script type="text/javascript">
-            $(".eliminar_informe").each(function () {
-                var href = $(this).attr('href');
-                $(this).attr('href', 'javascript:void(0)');
-                $(this).click(function () {
-                    if (confirm("¿Seguro desea eliminar este informe?")) {
-                        location.href = href;
-                    }
-                });
-            });
-        </script>
+        <?php endif; 

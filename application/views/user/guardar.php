@@ -2,14 +2,17 @@
         <form method="post" action="<?php echo base_url() ?>User_Controller/guardar_usuario/<?php echo $id_usuario ?>">
             <div class="row">
                <label> Documento </label>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                <input type="text" name="documento" value="<?php echo $id_usuario ?>" />
             </div>
             <div class="row">
                <label> Nombre </label>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                <input type="text" name="nombre" value="<?php echo $nombre_usuario; ?>" />
             </div>
             <div class="row">
-               <label> Contrase&ntilde;a</label>
+               <label> Contrase&ntilde;a </label>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                <input type="text" min="1" max="5" name="pass" value="<?php echo $password_usuario; ?>" />
             </div>
             <div class="row">
